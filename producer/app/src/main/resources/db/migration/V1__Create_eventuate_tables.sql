@@ -5,7 +5,7 @@ CREATE TABLE message (
     payload TEXT NOT NULL,
     creation_time BIGINT NOT NULL,
     published BOOLEAN NOT NULL,
-    message_partition INT NOT NULL
+    message_partition INT NULL
 );
 
 CREATE TABLE received_messages (

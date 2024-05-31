@@ -18,7 +18,7 @@ public class BookController {
     @PostMapping
     public ResponseEntity<Book> createBook(@RequestBody Book book) {
         Book created_book = bookService.createBook(book);
-        return new ResponseEntity<Book>(created_book, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<Book>(created_book, HttpStatus.OK);
     }
 
     @PutMapping("/{isbn}")

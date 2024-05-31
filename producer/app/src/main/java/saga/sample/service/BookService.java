@@ -16,14 +16,21 @@ import java.util.Collections;
 
 public class BookService {
 
+    // @Autowired
+    // private BookDomainEventPublisher bookDomainEventPublisher;
+
     @Autowired
-    private BookDomainEventPublisher bookDomainEventPublisher;
+    DomainEventPublisher domainEventPublisher;
 
     @Transactional
     public Book createBook(Book book) {
+        System.out.println("book:" + book.getIsbn());
         // Persist book to the database
         // bookRepository.save(book);
-        bookDomainEventPublisher.publish(book, Collections.singletonList(new BookCreatedEvent(book)));
+        // bookDomainEventPublisher.publish(book, Collections.singletonList(new
+        // BookUpdatedEvent(book)));
+        domainEventPublisher.publish("book", book.getIsbn(), Collections.singletonList(new BookCreatedEvent(book)));
+        System.out.println("publish book");
         return book;
     }
 
@@ -32,7 +39,8 @@ public class BookService {
         // Update book in the database
         // bookRepository.save(book);
 
-        bookDomainEventPublisher.publish(book, Collections.singletonList(new BookUpdatedEvent(book)));
+        // bookDomainEventPublisher.publish(book, Collections.singletonList(new
+        // BookUpdatedEvent(book)));
         return book;
     }
 
@@ -41,7 +49,8 @@ public class BookService {
         // Delete book from the database
         // bookRepository.delete(book);
 
-        bookDomainEventPublisher.publish(book, Collections.singletonList(new BookDeletedEvent(book)));
+        // bookDomainEventPublisher.publish(book, Collections.singletonList(new
+        // BookDeletedEvent(book)));
         return book;
     }
 }

@@ -10,7 +10,7 @@ public class BookEventConsumer {
 
     public DomainEventHandlers domainEventHandlers() {
         return DomainEventHandlersBuilder
-                .forAggregateType("book")
+                .forAggregateType("saga.sample.model.Book")
                 .onEvent(BookCreatedEvent.class, this::handleBookCreatedEvent)
                 .onEvent(BookUpdatedEvent.class, this::handleBookUpdatedEvent)
                 .onEvent(BookDeletedEvent.class, this::handleBookDeletedEvent)

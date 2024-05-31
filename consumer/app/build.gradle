@@ -12,6 +12,9 @@ plugins {
     id 'org.springframework.boot' version '3.2.5'
 	id 'io.spring.dependency-management' version '1.1.4'
 }
+ext {
+    eventuateTramVersion="0.34.0.RELEASE"
+}
 java {
 	sourceCompatibility = '17'
 }
@@ -38,22 +41,22 @@ dependencies {
     runtimeOnly 'com.mysql:mysql-connector-j:8.0.32'
     
     implementation 'com.fasterxml.jackson.core:jackson-databind'
-
-    // https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients
-    implementation 'org.springframework.kafka:spring-kafka:3.2.0'
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
     implementation 'org.slf4j:slf4j-api:2.0.13'
 
     // Eventuate Tram from https://mvnrepository.com/artifact/io.eventuate.tram.core
-    implementation 'io.eventuate.tram.core:eventuate-tram-spring-producer-jdbc:0.34.0.RELEASE'
-    implementation 'io.eventuate.tram.core:eventuate-tram-events:0.34.0.RELEASE'
-    implementation 'io.eventuate.tram.core:eventuate-tram-spring-events:0.34.0.RELEASE'
-    implementation 'io.eventuate.tram.core:eventuate-tram-spring-messaging:0.34.0.RELEASE'
-    implementation 'io.eventuate.tram.core:eventuate-tram-spring-events-publisher:0.34.0.RELEASE'
-    implementation 'io.eventuate.tram.core:eventuate-tram-aggregate-domain-events:0.34.0.RELEASE'
-    implementation 'io.eventuate.messaging.kafka:eventuate-messaging-kafka-spring-producer:0.18.0.RELEASE'
-    implementation 'io.eventuate.tram.core:eventuate-tram-messaging-producer-common:0.34.0.RELEASE'
-    implementation 'io.eventuate.tram.core:eventuate-tram-spring-jdbc-kafka:0.34.0.RELEASE'
+    // Basic messaging
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-messaging:${project.ext.eventuateTramVersion}"
+    // Domain events
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-events:${project.ext.eventuateTramVersion}"
+    // Command/Async Reply messaging
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-commands:${project.ext.eventuateTramVersion}"
+    // Consumer implementation
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-consumer-jdbc:${project.ext.eventuateTramVersion}"
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-jdbc-kafka:${project.ext.eventuateTramVersion}"
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-events-publisher-starter:${eventuateTramVersion}"
+    //aggregation
+    implementation "io.eventuate.tram.core:eventuate-tram-aggregate-domain-events:${project.ext.eventuateTramVersion}"
 
 
 

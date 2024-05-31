@@ -8,5 +8,4 @@ public class BookDomainEventPublisher extends AbstractAggregateDomainEventPublis
     public BookDomainEventPublisher(DomainEventPublisher eventPublisher) {
         super(eventPublisher, Book.class, Book::getIsbn);
     }
-
 }
