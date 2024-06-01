@@ -3,20 +3,38 @@ package saga.sample.event;
 import saga.sample.model.Book;
 
 public class BookCreatedEvent implements BookDomainEvent {
-    private Book book;
+    private String isbn;
+    private String title;
+    private String author;
 
-    public BookCreatedEvent() {
+    public BookCreatedEvent(String isbn, String title, String author) {
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
     }
 
-    public BookCreatedEvent(Book book) {
-        this.book = book;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public Book getBook() {
-        return book;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public String getTitle() {
+        return title;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
 }

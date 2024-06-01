@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Import;
 import io.eventuate.tram.events.subscriber.DomainEventDispatcher;
 import io.eventuate.tram.events.subscriber.DomainEventDispatcherFactory;
 import io.eventuate.tram.spring.events.subscriber.TramEventSubscriberConfiguration;
-import io.eventuate.tram.spring.jdbckafka.TramJdbcKafkaConfiguration;
+import io.eventuate.tram.spring.consumer.jdbc.TramConsumerJdbcAutoConfiguration;
 
 @Configuration
-@Import({ TramEventSubscriberConfiguration.class, TramJdbcKafkaConfiguration.class })
+@Import({ TramConsumerJdbcAutoConfiguration.class, TramEventSubscriberConfiguration.class })
 public class BookEventConfiguration {
 
     @Bean
@@ -21,7 +21,7 @@ public class BookEventConfiguration {
     @Bean
     public DomainEventDispatcher domainEventDispatcher(BookEventConsumer bookEventConsumer,
             DomainEventDispatcherFactory domainEventDispatcherFactory) {
-        return domainEventDispatcherFactory.make("ProducerEvents", bookEventConsumer.domainEventHandlers());
+        return domainEventDispatcherFactory.make("domainEvents", bookEventConsumer.domainEventHandlers());
     }
 
 }

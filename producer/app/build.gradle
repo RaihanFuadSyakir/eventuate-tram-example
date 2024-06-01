@@ -49,24 +49,28 @@ dependencies {
     implementation 'org.slf4j:slf4j-api:2.0.13'
 
     // Eventuate Tram from https://mvnrepository.com/artifact/io.eventuate.tram.core
-    // Basic messaging
+    // //basic package
+    // // Basic messaging
     // implementation "io.eventuate.tram.core:eventuate-tram-spring-messaging:${project.ext.eventuateTramVersion}"
-    // implementation "io.eventuate.tram.core:eventuate-tram-spring-messaging-starter:${project.ext.eventuateTramVersion}"
     // Domain events
     implementation "io.eventuate.tram.core:eventuate-tram-spring-events:${project.ext.eventuateTramVersion}"
-    // Command/Async Reply messaging
-    implementation "io.eventuate.tram.core:eventuate-tram-spring-commands:${project.ext.eventuateTramVersion}"
-    // Producer implementation
+    // // Command/Async Reply messaging
+    // implementation "io.eventuate.tram.core:eventuate-tram-spring-commands:${project.ext.eventuateTramVersion}"
+    // // Producer implementation
     // implementation "io.eventuate.tram.core:eventuate-tram-spring-producer-jdbc:${project.ext.eventuateTramVersion}"
-    implementation "io.eventuate.tram.core:eventuate-tram-messaging-producer-common:${project.ext.eventuateTramVersion}"
-    // Consumer implementation
-    implementation "io.eventuate.tram.core:eventuate-tram-spring-jdbc-kafka:${project.ext.eventuateTramVersion}"
-    // implementation "io.eventuate.tram.core:eventuate-tram-jdbc-rabbitmq:${project.ext.eventuateTramVersion}"
-    // implementation "io.eventuate.tram.core:eventuate-tram-spring-events-publisher-starter:${eventuateTramVersion}"
     //aggregation
     implementation "io.eventuate.tram.core:eventuate-tram-aggregate-domain-events:${project.ext.eventuateTramVersion}"
 
 
+    // all-in-one depedency
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-jdbc-kafka:${project.ext.eventuateTramVersion}"
+
+
+    // implementation "io.eventuate.tram.core:eventuate-tram-messaging-producer-common:${project.ext.eventuateTramVersion}"
+    // Consumer implementation
+    // implementation "io.eventuate.tram.core:eventuate-tram-jdbc-rabbitmq:${project.ext.eventuateTramVersion}"
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-events-publisher-starter:${eventuateTramVersion}"
+    // implementation "io.eventuate.tram.core:eventuate-tram-spring-messaging-starter:${project.ext.eventuateTramVersion}"
 
     // Test Dependency
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

@@ -22,9 +22,9 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable String id, @RequestBody Book book) {
+    public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book book) {
         // Ensure the id from the path matches the book's id
-        if (!id.equals(book.getId())) {
+        if (id != book.getId()) {
             return new ResponseEntity<Book>(HttpStatus.BAD_REQUEST);
         }
         Book updatedBook = bookService.updateBook(book);

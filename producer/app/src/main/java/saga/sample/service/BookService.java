@@ -1,40 +1,23 @@
 package saga.sample.service;
 
-import saga.sample.model.Book;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.eventuate.tram.events.publisher.DomainEventPublisher;
-import saga.sample.config.TramConfig;
 import saga.sample.event.BookCreatedEvent;
-
 import saga.sample.event.BookDomainEventPublisher;
+import saga.sample.model.Book;
 
 import java.util.Collections;
 
 @Transactional
 public class BookService {
-
-    // private BookDomainEventPublisher bookDomainEventPublisher;
-
-    // public BookService(BookDomainEventPublisher bookDomainEventPublisher) {
-    // this.bookDomainEventPublisher = bookDomainEventPublisher;
-    // }
     @Autowired
-    private DomainEventPublisher domainEventPublisher;
-
-    @Autowired
-    private TramConfig config;
+    private BookDomainEventPublisher bookDomainEventPublisher;
 
     public Book createBook(Book book) {
-        System.out.println("book:" + book.getId());
         // Persist book to the database
         // bookRepository.save(book);
-        // bookDomainEventPublisher.publish(book,
-        // Collections.singletonList(new BookCreatedEvent(book.getIsbn(),
-        // book.getTitle(), book.getAuthor())));
-        domainEventPublisher.publish(config.getAggregateType(), config.getAggregateId(),
+        bookDomainEventPublisher.publish(book,
                 Collections.singletonList(new BookCreatedEvent(book.getIsbn(),
                         book.getTitle(), book.getAuthor())));
         System.out.println("publish book");
