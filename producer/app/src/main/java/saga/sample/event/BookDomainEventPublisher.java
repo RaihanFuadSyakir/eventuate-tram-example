@@ -6,6 +6,6 @@ import saga.sample.model.Book;
 
 public class BookDomainEventPublisher extends AbstractAggregateDomainEventPublisher<Book, BookDomainEvent> {
     public BookDomainEventPublisher(DomainEventPublisher eventPublisher) {
-        super(eventPublisher, Book.class, Book::getIsbn);
+        super(eventPublisher, Book.class, Book::getId);
     }
 }

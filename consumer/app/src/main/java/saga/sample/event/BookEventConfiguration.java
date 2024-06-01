@@ -6,11 +6,11 @@ import org.springframework.context.annotation.Import;
 
 import io.eventuate.tram.events.subscriber.DomainEventDispatcher;
 import io.eventuate.tram.events.subscriber.DomainEventDispatcherFactory;
-import io.eventuate.tram.spring.consumer.kafka.EventuateTramKafkaMessageConsumerConfiguration;
 import io.eventuate.tram.spring.events.subscriber.TramEventSubscriberConfiguration;
+import io.eventuate.tram.spring.jdbckafka.TramJdbcKafkaConfiguration;
 
 @Configuration
-@Import({ TramEventSubscriberConfiguration.class, EventuateTramKafkaMessageConsumerConfiguration.class })
+@Import({ TramEventSubscriberConfiguration.class, TramJdbcKafkaConfiguration.class })
 public class BookEventConfiguration {
 
     @Bean
