@@ -1,8 +1,8 @@
-package saga.sample.event;
+package saga.sample.event.domain;
 
 import saga.sample.model.User;
 
-public class UserCreatedEvent {
+public class UserCreatedEvent implements Event {
     private User user;
 
     public UserCreatedEvent() {
