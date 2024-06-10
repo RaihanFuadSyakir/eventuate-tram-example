@@ -12,6 +12,9 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.KafkaTemplate;
 
+import saga.sample.event.UserCreatedEvent;
+import saga.sample.event.UserUpdatedEvent;
+
 @SpringBootApplication
 public class App {
     public static void main(String[] args) {
@@ -19,8 +22,16 @@ public class App {
     }
 
     @Bean
-    public NewTopic topic() {
-        return TopicBuilder.name("topic1")
+    public NewTopic userCreatedEventTopic() {
+        return TopicBuilder.name(UserCreatedEvent.class.getName())
+                .partitions(10)
+                .replicas(1)
+                .build();
+    }
+
+    @Bean
+    public NewTopic userUpdatedEventTopic() {
+        return TopicBuilder.name(UserUpdatedEvent.class.getName())
                 .partitions(10)
                 .replicas(1)
                 .build();
@@ -29,7 +40,9 @@ public class App {
     @Bean
     public ApplicationRunner runner(KafkaTemplate<String, String> template) {
         return args -> {
-            template.send("topic1", "test");
+            // Sending test message to each topic
+            template.send(UserCreatedEvent.class.getName(), "test UserCreatedEvent");
+            template.send(UserUpdatedEvent.class.getName(), "test UserUpdatedEvent");
         };
     }
 }
